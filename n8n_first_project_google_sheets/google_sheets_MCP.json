@@ -1,0 +1,298 @@
+{
+  "name": "google_sheets_MCP",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "8239f3ff-6205-4c73-b907-83390058fb89"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        -240
+      ],
+      "id": "980a2f15-6b3a-494a-b219-a50ff32ee839",
+      "name": "MCP Server Trigger",
+      "webhookId": "8239f3ff-6205-4c73-b907-83390058fb89"
+    },
+    {
+      "parameters": {
+        "description": "Retrieves rows from a Google Sheet",
+        "workflowId": {
+          "__rl": true,
+          "value": "R8G1Gyc6aCpxETxH",
+          "mode": "list",
+          "cachedResultName": "first_n8n_workflow — row_lookup"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query_column": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query_column', ``, 'string') }}",
+            "query_value": "={{ $fromAI('query_value', ``, 'string').toString() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query_column",
+              "displayName": "query_column",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "query_value",
+              "displayName": "query_value",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -288,
+        -80
+      ],
+      "id": "5c2faca2-269b-4b10-a7d9-cc79fae2fa00",
+      "name": "Call n8n Workflow Tool"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4",
+          "mode": "list",
+          "cachedResultName": "n8nstuff",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('ID__using_to_match_', ``, 'string') }}",
+            "Full Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Full_Name', ``, 'string') }}",
+            "First Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('First_Name', ``, 'string') }}",
+            "Last Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+            "Phone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Phone', ``, 'string') }}",
+            "Email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+            "Events": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Events', ``, 'string') }}",
+            "Manager": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Manager', ``, 'string') }}",
+            "Active": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Active', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Events",
+              "displayName": "Events",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Manager",
+              "displayName": "Manager",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Active",
+              "displayName": "Active",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        176,
+        -64
+      ],
+      "id": "47bec5a3-f1fc-4bed-a99a-6fdb67f51b5e",
+      "name": "Update row in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "FomnnjGNqwQpwl92",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4",
+          "mode": "list",
+          "cachedResultName": "n8nstuff",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4/edit#gid=0"
+        },
+        "startIndex": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Row_Number', ``, 'number') }}",
+        "numberToDelete": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Number_of_Rows_to_Delete', ``, 'number') }}"
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        -112,
+        -48
+      ],
+      "id": "b6a04487-e337-45f5-a40b-996cd1d2fcd4",
+      "name": "Delete rows or columns from sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "FomnnjGNqwQpwl92",
+          "name": "Google Sheets account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete rows or columns from sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e35837d4-295f-4977-b738-424f0e9b2c1d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "54c2508f7f156030cef703f89cc1e49c126a2352db191f05e03c345d28f1ad19"
+  },
+  "id": "Yn899VAPzBt9Q7du",
+  "tags": []
+}

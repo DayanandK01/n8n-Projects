@@ -1,0 +1,193 @@
+{
+  "name": "volunteer_lookup",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -240,
+        -272
+      ],
+      "id": "90339ded-5f75-4ad2-b8ef-65ffb6787016",
+      "name": "When chat message received",
+      "webhookId": "5b6cc985-e430-40a6-a7e7-c8e878199ebb"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput || $json.blocks[0].elements[0].elements[1].text }}",
+        "options": {
+          "systemMessage": "You are a helpful assistant\n\n## Column Headings\n- ID\t\n- Full Name\t\n- First Name\t\n- Last Name\t\n- Phone\t\n- Email\t\n- Events\t\n- Manager\t\n- Active"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        -272
+      ],
+      "id": "92d98169-fb15-4c1b-bbec-0640ff9171ba",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -96
+      ],
+      "id": "d2e7a4b4-9070-431e-8e08-4c6f199387b2",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "SF6rtY1lzRNk4Qz3",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://dayanandk-n8n.app.n8n.cloud/mcp/8239f3ff-6205-4c73-b907-83390058fb89"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [
+        272,
+        -64
+      ],
+      "id": "66980531-c0b4-48c8-8e36-c348d59ef616",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "app_mention"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C099Q2TRDR9",
+          "mode": "list",
+          "cachedResultName": "n8n_channel"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -416
+      ],
+      "id": "6532a43e-4d1e-4a61-890f-d7efbe99cc61",
+      "name": "Slack Trigger",
+      "webhookId": "5cd6b5ea-ef17-444f-a5c5-db28a62d97e9",
+      "credentials": {
+        "slackApi": {
+          "id": "rmBHVNXlxkiRY8A4",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $('Slack Trigger').item.json.channel }}",
+          "mode": "id"
+        },
+        "text": "={{ $json.output }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        384,
+        -272
+      ],
+      "id": "21dd0c95-d340-4c6d-b627-fce9df5bf74b",
+      "name": "Send a message",
+      "webhookId": "2dfa6c96-b694-4216-a6a7-6ac1c827b009",
+      "credentials": {
+        "slackApi": {
+          "id": "rmBHVNXlxkiRY8A4",
+          "name": "Slack account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7b70a0d1-9d1f-4490-8423-db4853ea6c97",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "54c2508f7f156030cef703f89cc1e49c126a2352db191f05e03c345d28f1ad19"
+  },
+  "id": "A0MdgmPCfzzQ1Cbt",
+  "tags": []
+}

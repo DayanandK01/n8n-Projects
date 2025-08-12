@@ -1,0 +1,129 @@
+{
+  "name": "row_lookup",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query_column"
+            },
+            {
+              "name": "query_value"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -256,
+        -32
+      ],
+      "id": "318466b6-3037-4b04-928c-d1adfc8957e5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4",
+          "mode": "list",
+          "cachedResultName": "n8nstuff",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1e81wPomO6x6-Lf37fSAZmF9MbeuXvgiMmfPuqLGr8Z4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -48,
+        -32
+      ],
+      "id": "b1490c9f-32a4-430c-957c-b4a1fd9f8dea",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "FomnnjGNqwQpwl92",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a2940709-e6f1-418d-a7bf-b4ad4dc78990",
+              "leftValue": "={{ $json[$('When Executed by Another Workflow').item.json.query_column] }}",
+              "rightValue": "={{ $('When Executed by Another Workflow').item.json.query_value }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        160,
+        -32
+      ],
+      "id": "742b0879-15b8-475f-818a-46b053a3e292",
+      "name": "Filter"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "94122b65-6309-4e06-8daa-1eb123909410",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "54c2508f7f156030cef703f89cc1e49c126a2352db191f05e03c345d28f1ad19"
+  },
+  "id": "R8G1Gyc6aCpxETxH",
+  "tags": []
+}
